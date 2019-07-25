@@ -10,5 +10,5 @@ def _render_template(name, seats):
         lstrip_blocks=True,
         keep_trailing_newline=True,
     )
-    template = env.get_template('remind.html')
+    template = env.get_template('confirmation.txt')
     return template.render(name=name, seats=seats)
