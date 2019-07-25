@@ -5,7 +5,7 @@ from flask import render_template
 import os
 import sys
 
-def sendmail(to_email, html):
+def sendmail(to_email, msg):
     
     from_email = ''
     msg = MIMEMultipart('alternative')
@@ -13,8 +13,7 @@ def sendmail(to_email, html):
     msg['From'] = from_email
     msg['To'] = to_email
     
-    body = html
-    content = MIMEText(body, 'html')
+    content = msg
     msg.attach(content)
     response = {}
     try:

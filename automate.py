@@ -1,15 +1,22 @@
 from scrape import scraper
-from csv_utils import read_csv, write_csv, get_unpaid_participants
-from generate import _render_template
+from file_utils import read_csv, write_csv, read_file, write_file
+from generate import _render_template, preprocess
 from mail import sendmail
 import json
 
-data = scraper('http://scrape.surge.sh/')
-write_csv(data, "studentdetails.csv")
+data = scraper('http://automatescrape.surge.sh/')
+write_csv(data)
 
-unpaid_participants, paid_count = get_unpaid_participants("studentdetails.csv")
-total_seats = 500
+participants = read_csv()
+participants = preprocess(participants)
 
-for participant in unpaid_participants:
-    html = _render_template(participant[0], total_seats-paid_count)
-    sendmail(to_email=participant[0], html=html)
+sent_mails = read_file()
+mails = []
+
+for participant in participants:
+    if participant['email'] not in sent_mails:
+        msg = _render_template(participant['name'], participant['payment'])
+        response = sendmail(to_email=participant['email'], msg=msg)
+        if response['email_status'] == "Success":
+            mails.append(participant['email'])
+            write_file(participant['email'])

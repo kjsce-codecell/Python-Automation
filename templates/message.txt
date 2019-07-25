@@ -1,0 +1,7 @@
+Hi {{name}},
+{% if payment == 'paid' %}
+This mail is to confirm your payment for the event. Attached with this mail is the pass which will be needed as proof for confirmation.
+{% else %}
+We noticed you have registered for our event. But, we haven't recieved any payments. Please make sure to confirm your presence by paying a refundable deposit.
+{% endif %}
+Thanks
