@@ -14,7 +14,7 @@ def read_csv():
 
 def write_csv(data):
     # opening the file in write mode
-    with open("studentdetails.csv", 'w') as csv_file:
+    with open("studentdetails.csv", 'w', newline='') as csv_file:
         # writing to the csv
         csv_writer = csv.writer(csv_file, delimiter=',')
         for row in data:

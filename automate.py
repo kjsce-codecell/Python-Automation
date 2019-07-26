@@ -6,7 +6,7 @@ from mail import sendmail
 import json
 
 # Scraping the webpage and storing the data in a csv
-data = scraper('http://automatescrape.surge.sh/')
+data = scraper('http://scrape.kjscecodecell.com/')
 write_csv(data)
 
 # Reading the scraped data from the csv and preprocessing the data
