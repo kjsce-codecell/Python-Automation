@@ -3,14 +3,19 @@ import requests
 
 
 def scraper(url):
+    # sending a get http request to the url
     response = requests.get(url)
+    # response: html page
     html = response.text
     data = []
 
+    # converting the html string to soup object
     soup = bs4.BeautifulSoup(html)
     li_tags = soup.select('li')
 
     for i in range(len(li_tags)):
+        # selecting all the necessary classes from the li tags
+        # Note: .select returns a list of elements
         name = li_tags[i].select('.name')[0].text
         dob = li_tags[i].select('.dob')[0].text
         email = li_tags[i].select('.email')[0].text
