@@ -2,9 +2,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 import smtplib
-from flask import render_template
-import os
-import sys
+
 
 def sendmail(to_email, message, image_path):
 
