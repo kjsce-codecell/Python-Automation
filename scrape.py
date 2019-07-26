@@ -10,7 +10,7 @@ def scraper(url):
     data = []
 
     # converting the html string to soup object
-    soup = bs4.BeautifulSoup(html)
+    soup = bs4.BeautifulSoup(html, "html.parser")
     li_tags = soup.select('li')
 
     for i in range(len(li_tags)):
