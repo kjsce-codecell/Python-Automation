@@ -4,7 +4,7 @@ from email.mime.image import MIMEImage
 import smtplib
 
 
-def sendmail(to_email, message, image_path):
+def sendmail(to_email, message, image_path, payment_status):
 
     from_email = ""
     msg = MIMEMultipart('alternative')
@@ -16,10 +16,11 @@ def sendmail(to_email, message, image_path):
     msg.attach(content)
 
     # This example assumes the image is in the given directory
-    fp = open(image_path, 'rb')
-    msgImage = MIMEImage(fp.read())
-    fp.close()
-    msg.attach(msgImage)
+    if payment_status == 'paid':
+        fp = open(image_path, 'rb')
+        msgImage = MIMEImage(fp.read())
+        fp.close()
+        msg.attach(msgImage)
 
     response = {}
     try:

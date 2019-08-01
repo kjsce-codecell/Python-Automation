@@ -24,11 +24,13 @@ def write_csv(data):
 def read_file():
     # opening the file in read mode and reading lines
     with open("sentmails.txt", 'r') as f:
-        sent_mails = f.readlines()
+        sent_mails = f.read().split('\n')[:-1]
+        # Another way
+        # sent_mails = [mail.strip() for mail in f.readlines()]
     return sent_mails
 
 
 def write_file(mail):
     # opening the file in append mode and appending the mail at the end
     with open("sentmails.txt", 'a') as f:
-        f.write(mail + "\n")
+        f.write(mail + '\n')

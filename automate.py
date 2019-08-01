@@ -20,13 +20,21 @@ sent_mails = read_file()
 for participant in participants:
     # Checking if the participant was sent a mail previously
     if participant['email'] not in sent_mails:
+        name = participant['name']
+        email = participant['email']
+        phone = participant['phone']
+        payment_status = participant['payment']
+
         # Generating a message from the template
-        msg = _render_template(participant['name'], participant['payment'])
+        message = _render_template(name, payment_status)
+
         # Generating a custom image
-        image_path = pass_gen(participant['name'], participant['email'], participant['phone'])
+        image_path = pass_gen(name, email, phone)
+
         # Sending the message to the participant via mail
-        response = sendmail(to_email=participant['email'], message=msg, image_path=image_path)
+        response = sendmail(email, message, image_path, payment_status)
         print(response)
-        if response['email_status'] == "Success" and participant['payment'] == "paid":
+
+        if response['email_status'] == "Success" and payment_status == "paid":
             # if mail was sent successfully append the email to sentmails.txt
             write_file(participant['email'])
